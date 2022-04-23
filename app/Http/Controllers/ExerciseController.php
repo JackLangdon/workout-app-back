@@ -14,9 +14,22 @@ class ExerciseController extends Controller
         return $exercises;
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        // create new exercise
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'video_url' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255'
+        ]);
+
+        $exercise = Exercise::create([
+            'name' => $validatedData['name'],
+            'created_by' => $request->user()->id,
+            'video_url' => $validatedData['video_url'],
+            'description' => $validatedData['description']
+        ]);
+
+        return 'Successfully created new exercise: ' . $exercise['name'];
     }
 
     public function store()

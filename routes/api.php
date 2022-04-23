@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('exercises')->group(function () {
         Route::get('/', [ExerciseController::class, 'index'])->name('index');
 
-        // Route::get('/create', [ExerciseController::class, 'create'])->name('create');
+        Route::post('/create', [ExerciseController::class, 'create'])->name('create');
 
         // Route::post('/', [ExerciseController::class, 'store'])->name('store');
 
