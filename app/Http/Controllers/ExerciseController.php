@@ -14,7 +14,12 @@ class ExerciseController extends Controller
         return $exercises;
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+        // return create exercise view
+    }
+
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -32,11 +37,6 @@ class ExerciseController extends Controller
         return 'Successfully created new exercise: ' . $exercise['name'];
     }
 
-    public function store()
-    {
-        // ???
-    }
-
     public function show(Request $request, $id)
     {
         $exercise = Exercise::where('created_by', $request->user()->id)->where('id', $id)->first();
@@ -52,7 +52,7 @@ class ExerciseController extends Controller
 
     public function edit()
     {
-        // edit an exercise
+        // return edit exercise view
     }
 
     public function update()
