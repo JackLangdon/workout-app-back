@@ -37,9 +37,17 @@ class ExerciseController extends Controller
         // ???
     }
 
-    public function show()
+    public function show(Request $request, $id)
     {
-        // show a single exercise
+        $exercise = Exercise::where('created_by', $request->user()->id)->where('id', $id)->first();
+
+        if (!$exercise) {
+            return response()->json([
+                'message' => 'Exercise ID not found in your library'
+            ], 404);
+        }
+
+        return $exercise;
     }
 
     public function edit()

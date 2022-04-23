@@ -41,5 +41,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory(10)->create();
+
+        Exercise::create([
+            'name' => 'Squat',
+            'created_by' => 2,
+            'video_url' => '',
+            'description' => 'Put the bar on your back, keep your back straight, squat to the ground, stand up again',
+        ]);
     }
 }
