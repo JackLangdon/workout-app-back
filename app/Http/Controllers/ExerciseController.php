@@ -60,8 +60,18 @@ class ExerciseController extends Controller
         // update an exercise
     }
 
-    public function destroy()
+    public function destroy(Request $request, $id)
     {
-        // delete an exercise
+        $exercise = Exercise::where('created_by', $request->user()->id)->where('id', $id)->first();
+
+        if (!$exercise) {
+            return response()->json([
+                'message' => 'Exercise ID not found in your library'
+            ], 404);
+        }
+
+        $exercise->delete();
+
+        return $exercise->name . ' successfully removed';
     }
 }

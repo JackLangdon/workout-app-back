@@ -48,5 +48,12 @@ class DatabaseSeeder extends Seeder
             'video_url' => '',
             'description' => 'Put the bar on your back, keep your back straight, squat to the ground, stand up again',
         ]);
+
+        Exercise::create([
+            'name' => 'Shoulder Press',
+            'created_by' => $user->id,
+            'video_url' => '',
+            'description' => 'Stand up straight, hold the bar against the top of your chest, push it up over your head, lower it back to your chest.',
+        ]);
     }
 }
