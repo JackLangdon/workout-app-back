@@ -55,9 +55,31 @@ class ExerciseController extends Controller
         // return edit exercise view
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        // update an exercise
+        $exercise = Exercise::where('created_by', $request->user()->id)->where('id', $id)->first();
+
+        if (!$exercise) {
+            return response()->json([
+                'message' => 'Exercise ID not found in your library'
+            ], 404);
+        }
+ 
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'video_url' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255'
+        ]);
+
+        $exercise->update([
+            'name' => $validatedData['name'],
+            'video_url' => $validatedData['video_url'],
+            'description' => $validatedData['description']
+        ]);
+        
+        $exercise->save();
+
+        return 'Updated successfully';
     }
 
     public function destroy(Request $request, $id)

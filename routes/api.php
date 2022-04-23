@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Route::get('/{exercise}/edit', [ExerciseController::class, 'edit'])->name('edit');
 
-        // Route::put('/{exercise}', [ExerciseController::class, 'update'])->name('update');
+        Route::post('/{exercise}', [ExerciseController::class, 'update'])->name('update');
 
         Route::delete('/{exercise}', [ExerciseController::class, 'destroy'])->name('destroy');
     });
