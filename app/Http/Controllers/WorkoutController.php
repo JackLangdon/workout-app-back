@@ -80,6 +80,16 @@ class WorkoutController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        // delete workout
+        $workout = Workout::where('created_by', $request->user()->id)->where('id', $id)->first();
+
+        if (!$workout) {
+            return response()->json([
+                'message' => 'Workout ID not found in your library'
+            ], 404);
+        }
+
+        $workout->delete();
+
+        return $workout->name . ' successfully removed';
     }
 }

@@ -59,6 +59,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/{workout}', [WorkoutController::class, 'update'])->name('update');
 
-        // Route::delete('/{workout}', [WorkoutController::class, 'destroy'])->name('destroy');
+        Route::delete('/{workout}', [WorkoutController::class, 'destroy'])->name('destroy');
     });
 });
