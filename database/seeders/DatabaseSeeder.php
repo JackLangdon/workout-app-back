@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Workout;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -73,6 +74,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Another Workout',
             'created_by' => 2,
             'description' => 'Lorem ipsum dolor est...',
+        ]);
+
+        DB::table('workout_exercise')->insert([
+            'workout_id' => 1,
+            'exercise_id' => 1
+        ]);
+        DB::table('workout_exercise')->insert([
+            'workout_id' => 1,
+            'exercise_id' => 2
         ]);
     }
 }

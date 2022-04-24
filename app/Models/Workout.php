@@ -10,4 +10,9 @@ class Workout extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function exercises()
+    {
+        return $this->belongsToMany(Exercise::class, 'workout_exercise', 'workout_id', 'exercise_id');
+    }
 }

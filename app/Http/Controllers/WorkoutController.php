@@ -11,6 +11,10 @@ class WorkoutController extends Controller
     {
         $workouts = Workout::where('created_by', $request->user()->id)->get();
 
+        foreach($workouts as $workout) {
+            $workout['exercises'] = $workout->exercises;
+        }
+
         return $workouts;
     }
 
@@ -44,6 +48,8 @@ class WorkoutController extends Controller
                 'message' => 'Workout ID not found in your library'
             ], 404);
         }
+
+        $workout['exercises'] = $workout->exercises;
 
         return $workout;
     }
