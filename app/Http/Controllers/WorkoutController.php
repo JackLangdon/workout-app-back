@@ -37,7 +37,15 @@ class WorkoutController extends Controller
 
     public function show(Request $request, $id)
     {
-        // show single workout
+        $workout = Workout::where('created_by', $request->user()->id)->where('id', $id)->first();
+
+        if (!$workout) {
+            return response()->json([
+                'message' => 'Workout ID not found in your library'
+            ], 404);
+        }
+
+        return $workout;
     }
 
     public function edit()
