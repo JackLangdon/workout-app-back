@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\WorkoutController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -43,5 +44,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{exercise}', [ExerciseController::class, 'update'])->name('update');
 
         Route::delete('/{exercise}', [ExerciseController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('workouts')->group(function () {
+        Route::get('/', [WorkoutController::class, 'index'])->name('index');
+
+        // Route::get('/create', [WorkoutController::class, 'create'])->name('create');
+
+        Route::post('/', [WorkoutController::class, 'store'])->name('store');
+
+        Route::get('/{workout}', [WorkoutController::class, 'show'])->name('show');
+
+        // Route::get('/{workout}/edit', [WorkoutController::class, 'edit'])->name('edit');
+
+        Route::post('/{workout}', [WorkoutController::class, 'update'])->name('update');
+
+        Route::delete('/{workout}', [WorkoutController::class, 'destroy'])->name('destroy');
     });
 });

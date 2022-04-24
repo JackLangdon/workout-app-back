@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exercise extends Model
+class Workout extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function workouts()
+    public function exercises()
     {
-        return $this->belongsToMany(Workout::class, 'workout_exercise', 'workout_id', 'exercise_id');
+        return $this->belongsToMany(Exercise::class, 'workout_exercise', 'workout_id', 'exercise_id');
     }
 }
