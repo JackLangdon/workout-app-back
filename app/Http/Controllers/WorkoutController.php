@@ -21,7 +21,18 @@ class WorkoutController extends Controller
 
     public function store(Request $request)
     {
-        // save new workout
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255'
+        ]);
+
+        $workout = Workout::create([
+            'name' => $validatedData['name'],
+            'created_by' => $request->user()->id,
+            'description' => $validatedData['description']
+        ]);
+
+        return 'Successfully created new workout: ' . $workout['name'];
     }
 
     public function show(Request $request, $id)

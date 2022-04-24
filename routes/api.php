@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Route::get('/create', [WorkoutController::class, 'create'])->name('create');
 
-        // Route::post('/', [WorkoutController::class, 'store'])->name('store');
+        Route::post('/', [WorkoutController::class, 'store'])->name('store');
 
         // Route::get('/{workout}', [WorkoutController::class, 'show'])->name('show');
 
