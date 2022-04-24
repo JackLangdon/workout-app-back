@@ -55,7 +55,27 @@ class WorkoutController extends Controller
 
     public function update(Request $request, $id)
     {
-        // update workout
+        $workout = Workout::where('created_by', $request->user()->id)->where('id', $id)->first();
+
+        if (!$workout) {
+            return response()->json([
+                'message' => 'Workout ID not found in your library'
+            ], 404);
+        }
+ 
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255'
+        ]);
+
+        $workout->update([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description']
+        ]);
+        
+        $workout->save();
+
+        return 'Updated successfully';
     }
 
     public function destroy(Request $request, $id)
